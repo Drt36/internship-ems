@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
-@Table(name = "salary",schema = "ems_db")
+@Table(name = "salary", schema = "ems_db")
 @Data
 public class Salary {
     @Id
@@ -24,4 +24,8 @@ public class Salary {
     private float amount;
 
     private float bonus;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", unique = true)
+    private Employee employee;
 }

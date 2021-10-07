@@ -1,6 +1,7 @@
 package com.internship.ems.model;
 
 import com.internship.ems.enums.Gender;
+import com.internship.ems.listener.EmployeeListener;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "employee", schema = "ems_db")
 @Data
+@EntityListeners(EmployeeListener.class)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +55,8 @@ public class Employee {
     @Column(length = 100)
     @Size(max = 100, message = "Maximum length should be 100.")
     private String address;
+
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "employee")
+    private Salary salary;
 
 }

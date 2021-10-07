@@ -1,5 +1,6 @@
 package com.internship.ems.controller;
 
+import com.internship.ems.dto.EmployeeDto;
 import com.internship.ems.model.Employee;
 import com.internship.ems.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/employees")
-    public List<Employee> getAllEmployee(){
+    public List<EmployeeDto> getAllEmployee(){
         return employeeService.getAll();
     }
 
