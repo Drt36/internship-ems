@@ -3,6 +3,8 @@ package com.internship.ems.controller;
 import com.internship.ems.model.Department;
 import com.internship.ems.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,13 +26,13 @@ public class DepartmentController {
     }
 
     @PostMapping("/departments")
-    public Department saveDepartment(@Valid @RequestBody Department department) {
-        return departmentService.save(department);
+    public ResponseEntity<Department> saveDepartment(@Valid @RequestBody Department department) {
+        return new ResponseEntity<Department>(departmentService.save(department), HttpStatus.CREATED);
     }
 
     @PutMapping("/departments/{id}")
-    public Department updateDepartment(@PathVariable int id, @RequestBody Department departmentInfo) {
-        return departmentService.updateDepartment(id, departmentInfo);
+    public ResponseEntity<Department> updateDepartment(@PathVariable int id, @Valid @RequestBody Department departmentInfo) {
+        return new ResponseEntity<Department>(departmentService.updateDepartment(id, departmentInfo), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/departments/{id}")

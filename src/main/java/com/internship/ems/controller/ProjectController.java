@@ -3,6 +3,8 @@ package com.internship.ems.controller;
 import com.internship.ems.model.Project;
 import com.internship.ems.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,13 +27,13 @@ public class ProjectController {
     }
 
     @PostMapping("/projects")
-    public Project saveProject(@Valid @RequestBody Project project) {
-        return projectService.save(project);
+    public ResponseEntity<Project> saveProject(@Valid @RequestBody Project project) {
+        return new ResponseEntity<Project>(projectService.save(project), HttpStatus.CREATED);
     }
 
     @PutMapping("/projects/{id}")
-    public Project updateProject(@PathVariable int id, @RequestBody Project projectInfo) {
-        return projectService.updateProject(id, projectInfo);
+    public ResponseEntity<Project> updateProject(@PathVariable int id, @Valid @RequestBody Project projectInfo) {
+        return new ResponseEntity<Project>(projectService.updateProject(id, projectInfo), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/projects/{id}")

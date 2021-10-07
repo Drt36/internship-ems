@@ -3,6 +3,8 @@ package com.internship.ems.controller;
 import com.internship.ems.model.Employee;
 import com.internship.ems.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,13 +27,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public Employee saveEmployee(@Valid @RequestBody Employee employee){
-        return employeeService.save(employee);
+    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee){
+        return new ResponseEntity<Employee>(employeeService.save(employee), HttpStatus.CREATED);
     }
 
     @PutMapping("/employees/{id}")
-    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employeeInfo) {
-        return employeeService.updateEmployee(id, employeeInfo);
+    public ResponseEntity<Employee> updateEmployee(@PathVariable int id,@Valid @RequestBody Employee employeeInfo) {
+        return new ResponseEntity<Employee>(employeeService.updateEmployee(id, employeeInfo), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/employees/{id}")

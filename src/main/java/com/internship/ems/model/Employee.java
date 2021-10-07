@@ -10,43 +10,49 @@ import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", schema = "ems_db")
 @Data
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employee_id;
 
-    @NotEmpty
-    @Size(max=50)
+    @Column(nullable = false, length = 50)
+    @NotEmpty(message = "First Name Should not be empty!")
+    @Size(max = 50, message = "Maximum length should be 50.")
     private String firstName;
 
-    @NotEmpty
-    @Size(max=50)
+    @Column(nullable = false, length = 50)
+    @NotEmpty(message = "Last Name should not be empty!")
+    @Size(max = 50, message = "Maximum length should be 50.")
     private String lastName;
 
-    @NotEmpty
-    @Size(max=6)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 6)
+    @NotEmpty(message = "Gender should not be empty!")
+    @Size(max = 6, message = "Maximum length should be 6.")
     private String gender;
 
-    @NotEmpty
+    @NotNull(message = "Age should not be empty!")
     private int age;
 
     @Email
-    @NotEmpty
-    @Size(max=50)
+    @NotEmpty(message = "Email should not be empty!")
+    @Column(unique = true, nullable = false, length = 50)
+    @Size(max = 50, message = "Maximum length should be 50.")
     private String email;
 
-    @NotEmpty
-    @Size(max=50)
+    @Size(max = 50, message = "Maximum length should be 50.")
+    @Column(columnDefinition = "varchar(50) default 'Manager'")
     private String designation;
 
-    @NotEmpty
+    @NotNull(message = "Date should not be empty!")
     private Date hireDate;
 
     private Date resignedDate;
 
-    @Size(max =100)
+    @Column(length = 100)
+    @Size(max = 100, message = "Maximum length should be 100.")
     private String address;
 
 }

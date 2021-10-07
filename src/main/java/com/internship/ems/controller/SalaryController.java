@@ -3,6 +3,8 @@ package com.internship.ems.controller;
 import com.internship.ems.model.Salary;
 import com.internship.ems.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,13 +26,13 @@ public class SalaryController {
     }
 
     @PostMapping("/salary")
-    public Salary saveSalary(@Valid @RequestBody Salary salary) {
-        return salaryService.save(salary);
+    public ResponseEntity<Salary> saveSalary(@Valid @RequestBody Salary salary) {
+        return new ResponseEntity<Salary>(salaryService.save(salary), HttpStatus.CREATED);
     }
 
     @PutMapping("/salary/{id}")
-    public Salary updateSalary(@PathVariable int id, @RequestBody Salary salaryInfo) {
-        return salaryService.updateSalary(id, salaryInfo);
+    public ResponseEntity<Salary> updateSalary(@PathVariable int id, @Valid @RequestBody Salary salaryInfo) {
+        return new ResponseEntity<Salary>(salaryService.updateSalary(id, salaryInfo), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/salary/{id}")
