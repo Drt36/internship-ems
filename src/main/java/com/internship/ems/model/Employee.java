@@ -1,5 +1,6 @@
 package com.internship.ems.model;
 
+import com.internship.ems.enums.Gender;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -29,9 +30,7 @@ public class Employee {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 6)
-    @NotEmpty(message = "Gender should not be empty!")
-    @Size(max = 6, message = "Maximum length should be 6.")
-    private String gender;
+    private Gender gender;
 
     @NotNull(message = "Age should not be empty!")
     private int age;
