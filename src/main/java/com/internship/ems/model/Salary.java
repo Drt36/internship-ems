@@ -1,9 +1,10 @@
 package com.internship.ems.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
@@ -13,7 +14,7 @@ import java.sql.Date;
 public class Salary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int salary_id;
+    private int salaryId;
 
     @Column(nullable = false)
     @NotNull(message = "Issue date should not be empty!")
@@ -25,7 +26,8 @@ public class Salary {
 
     private float bonus;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", unique = true)
+    @OneToOne(mappedBy = "salary",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Employee employee;
+
 }

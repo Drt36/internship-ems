@@ -1,8 +1,13 @@
 package com.internship.ems.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.internship.ems.enums.Gender;
 import com.internship.ems.listener.EmployeeListener;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -14,11 +19,13 @@ import java.sql.Date;
 @Entity
 @Table(name = "employee", schema = "ems_db")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EntityListeners(EmployeeListener.class)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employee_id;
+    private int employeeId;
 
     @Column(nullable = false, length = 50)
     @NotEmpty(message = "First Name Should not be empty!")
@@ -38,7 +45,7 @@ public class Employee {
     private int age;
 
     @Email
-    @NotEmpty(message = "Email should not be empty!")
+    @NotNull(message = "Email should not be empty!")
     @Column(unique = true, nullable = false, length = 50)
     @Size(max = 50, message = "Maximum length should be 50.")
     private String email;
@@ -56,7 +63,14 @@ public class Employee {
     @Size(max = 100, message = "Maximum length should be 100.")
     private String address;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "employee")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "salary_id")
+    @JsonBackReference
     private Salary salary;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="department_id")
+    @JsonBackReference
+    private Department department;
 
 }

@@ -1,7 +1,7 @@
 package com.internship.ems.controller;
 
 import com.internship.ems.dto.EmployeeDto;
-import com.internship.ems.model.Employee;
+import com.internship.ems.mapper.EmployeeMapper;
 import com.internship.ems.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,24 +17,29 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    EmployeeMapper employeeMapper;
+
     @GetMapping("/employees")
     public List<EmployeeDto> getAllEmployee(){
-        return employeeService.getAll();
+        return employeeMapper.modelsToDtos(employeeService.getAll());
     }
 
     @GetMapping("/employees/{id}")
-    public Employee getEmployeeById(@PathVariable int id){
-        return employeeService.getById(id);
+    public EmployeeDto getEmployeeById(@PathVariable int id){
+        return employeeMapper.modelToDto(employeeService.getById(id));
     }
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee){
-        return new ResponseEntity<Employee>(employeeService.save(employee), HttpStatus.CREATED);
+    public ResponseEntity<EmployeeDto> saveEmployee(@Valid @RequestBody EmployeeDto employeeDto){
+        EmployeeDto employeeDtoSave=employeeMapper.modelToDto(employeeService.save(employeeMapper.dtoToModel(employeeDto)));
+        return new ResponseEntity<EmployeeDto>( employeeDtoSave,HttpStatus.CREATED);
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int id,@Valid @RequestBody Employee employeeInfo) {
-        return new ResponseEntity<Employee>(employeeService.updateEmployee(id, employeeInfo), HttpStatus.CREATED);
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable int id,@Valid @RequestBody EmployeeDto employeeInfo) {
+        EmployeeDto employeeDtoUpdate=employeeMapper.modelToDto(employeeService.updateEmployee(id,employeeMapper.dtoToModel(employeeInfo)));
+        return new ResponseEntity<EmployeeDto>(employeeDtoUpdate,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/employees/{id}")

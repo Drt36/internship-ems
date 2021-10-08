@@ -16,31 +16,31 @@ public class EmployeeListener {
 
     @PreUpdate
     private void beforeUpdate(Employee employee) {
-        log.info("On processing to update employee: " + employee.getEmployee_id());
+        log.info("On processing to update employee: " + employee.getEmployeeId());
     }
 
     @PreRemove
     private void beforeRemove(Employee employee) {
-        log.info("On processing to delete employee: " + employee.getEmployee_id());
+        log.info("On processing to delete employee: " + employee.getEmployeeId());
     }
 
     @PostPersist
     private void afterPost(Employee employee) {
-        log.info("Add process completed for employee: " + employee.getEmployee_id());
+        log.info("Add process completed for employee: " + employee.getEmployeeId());
     }
 
     @PostUpdate
     private void afterUpdate(Employee employee) {
-        log.info("Update process completed for employee: " + employee.getEmployee_id());
+        log.info("Update process completed for employee: " + employee.getEmployeeId());
     }
 
     @PostRemove
     private void afterRemove(Employee employee) {
-        log.info("Delete process completed for employee: " + employee.getEmployee_id());
+        log.info("Delete process completed for employee: " + employee.getEmployeeId());
     }
 
     @PostLoad
     private void afterLoad(Employee employee) {
-        log.info("Employee loaded from database: " + employee.getEmployee_id());
+        log.info("Employee loaded from database: " + employee.getEmployeeId());
     }
 }

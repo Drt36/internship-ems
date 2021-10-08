@@ -1,8 +1,6 @@
 package com.internship.ems.service;
 
 import com.internship.ems.dao.EmployeeRepository;
-import com.internship.ems.dto.EmployeeDto;
-import com.internship.ems.mapper.EmployeeMapper;
 import com.internship.ems.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,6 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-
 
     public Employee save(Employee employee){
         return employeeRepository.save(employee);
@@ -41,8 +38,9 @@ public class EmployeeService {
         return employee;
     }
 
-    public List<EmployeeDto> getAll() {
-        List<EmployeeDto> result =EmployeeMapper.EMPLOYEE_MAPPER.modelsToDtos(employeeRepository.findAll());
+    public List<Employee> getAll() {
+        List<Employee> result = new ArrayList<>();
+        employeeRepository.findAll().forEach(result::add);
         return result;
     }
 
