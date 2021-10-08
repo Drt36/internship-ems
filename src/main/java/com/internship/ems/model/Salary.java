@@ -1,7 +1,7 @@
 package com.internship.ems.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.internship.ems.listener.SalaryListener;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,6 +11,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "salary", schema = "ems_db")
 @Data
+@EntityListeners(SalaryListener.class)
 public class Salary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class Salary {
 
     private float bonus;
 
-    @OneToOne(mappedBy = "salary",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "salary", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "backrefrence-salary")
     private Employee employee;
 
