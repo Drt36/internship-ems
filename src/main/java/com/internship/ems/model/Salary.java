@@ -27,7 +27,7 @@ public class Salary {
     private float bonus;
 
     @OneToOne(mappedBy = "salary",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference(value = "backrefrence-salary")
     private Employee employee;
 
 }

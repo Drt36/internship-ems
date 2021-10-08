@@ -27,7 +27,6 @@ public class Department {
     private String description;
 
     @OneToMany(mappedBy="department",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference(value = "backrefrence-department")
     private List<Employee> employees;
-
 }

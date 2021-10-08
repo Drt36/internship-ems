@@ -1,8 +1,6 @@
 package com.internship.ems.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.internship.ems.enums.Gender;
 import com.internship.ems.listener.EmployeeListener;
 import lombok.AllArgsConstructor;
@@ -64,13 +62,13 @@ public class Employee {
     private String address;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "salary_id")
-    @JsonBackReference
+    @JoinColumn(name = "salary_id",unique = true)
+    @JsonBackReference(value = "backrefrence-salary")
     private Salary salary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="department_id")
-    @JsonBackReference
+    @JsonBackReference(value = "backrefrence-department")
     private Department department;
 
 }

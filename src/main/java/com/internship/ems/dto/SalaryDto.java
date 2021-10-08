@@ -23,6 +23,5 @@ public class SalaryDto {
 
     private float bonus;
 
-
     private Employee employee;
 }
