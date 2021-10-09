@@ -1,7 +1,6 @@
 package com.internship.ems.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.internship.ems.enums.Gender;
 import com.internship.ems.model.Department;
 import com.internship.ems.model.Salary;

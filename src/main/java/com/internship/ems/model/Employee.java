@@ -62,7 +62,7 @@ public class Employee {
     private String address;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "salary_id", unique = true)
+    @JoinColumn(name = "salary_id",unique = true)
     @JsonBackReference(value = "backrefrence-salary")
     private Salary salary;
 
