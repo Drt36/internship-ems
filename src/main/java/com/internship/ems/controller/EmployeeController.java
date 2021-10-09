@@ -61,8 +61,8 @@ public class EmployeeController {
 
     @Transactional
     @PutMapping("/custom/employees/{id}")
-    public void updateEmployee(@PathVariable int id,@RequestParam("firstName") String firstName) {
-         employeeService.updateEmployeeById(id, firstName);
+    public void updateEmployee(@PathVariable int id, @RequestParam("firstName") String firstName) {
+        employeeService.updateEmployeeById(id, firstName);
     }
 
     @Transactional
@@ -71,4 +71,18 @@ public class EmployeeController {
         employeeService.deleteEmployeeById(id);
     }
 
+    @GetMapping("/custom/employees/criteriaapi")
+    public List<EmployeeDto> getEmployeeByJpql(@RequestParam("amount") float amount, @RequestParam("bonus") float bonus) {
+        return employeeMapper.modelsToDtos(employeeService.getByCriteriaApi(amount, bonus));
+    }
+
+    @GetMapping("/custom/employees/typedquery")
+    public List<EmployeeDto> getEmployeeByTypedQuery(@RequestParam("departmentId") int departmentId) {
+        return employeeMapper.modelsToDtos(employeeService.getByTypedQuery(departmentId));
+    }
+
+    @GetMapping("/custom/employees/namedquery")
+    public List<EmployeeDto> getEmployeeByNamedQuery(@RequestParam("departmentId") int departmentId) {
+        return employeeMapper.modelsToDtos(employeeService.getByNamedQuery(departmentId));
+    }
 }

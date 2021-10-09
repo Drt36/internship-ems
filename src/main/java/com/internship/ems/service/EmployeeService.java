@@ -1,5 +1,6 @@
 package com.internship.ems.service;
 
+import com.internship.ems.dao.EmployeeDao;
 import com.internship.ems.dao.EmployeeRepository;
 import com.internship.ems.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     public Employee save(Employee employee) {
         return employeeRepository.save(employee);
@@ -77,6 +81,18 @@ public class EmployeeService {
     public void deleteEmployeeById(int employeeId){
       employeeRepository.deleteEmployeeById(employeeId);
         System.out.println("Deleted using custom query");
+    }
+
+    public  List<Employee> getByCriteriaApi(float amount,float bonus){
+        return employeeDao.getEmployee(amount,bonus);
+    }
+
+    public  List<Employee> getByTypedQuery(int departmentId){
+        return employeeDao.getEmployeeByTypedQuery(departmentId);
+    }
+
+    public  List<Employee> getByNamedQuery(int departmentId){
+        return employeeDao.getEmployeeByNamedQuery(departmentId);
     }
 }
 
