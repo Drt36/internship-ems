@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface DepartmentMapper {
-    DepartmentMapper DEPARTMENT_MAPPER= Mappers.getMapper(DepartmentMapper.class);
+    DepartmentMapper DEPARTMENT_MAPPER = Mappers.getMapper(DepartmentMapper.class);
 
     DepartmentDto modelToDto(Department department);
 

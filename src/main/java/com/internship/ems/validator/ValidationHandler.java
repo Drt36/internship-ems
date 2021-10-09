@@ -1,4 +1,4 @@
-package com.internship.ems.controller;
+package com.internship.ems.validator;
 
 import java.util.HashMap;
 import java.util.Map;

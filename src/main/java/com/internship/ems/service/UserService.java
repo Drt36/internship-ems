@@ -15,7 +15,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public User save(User user){
+    public User save(User user) {
         return userRepo.save(user);
     }
 
@@ -37,7 +37,7 @@ public class UserService {
         return result;
     }
 
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         userRepo.deleteById(id);
     }
 }

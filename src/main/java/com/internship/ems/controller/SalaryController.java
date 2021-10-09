@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class SalaryController {
     @Autowired
-    private  SalaryService salaryService;
+    private SalaryService salaryService;
 
     @Autowired
     private SalaryMapper salaryMapper;
@@ -31,13 +31,13 @@ public class SalaryController {
 
     @PostMapping("/salary")
     public ResponseEntity<SalaryDto> saveSalary(@Valid @RequestBody SalaryDto salaryDto) {
-        SalaryDto salaryDtoSave=salaryMapper.modelToDto(salaryService.save(salaryMapper.dtoToModel(salaryDto)));
+        SalaryDto salaryDtoSave = salaryMapper.modelToDto(salaryService.save(salaryMapper.dtoToModel(salaryDto)));
         return new ResponseEntity<SalaryDto>(salaryDtoSave, HttpStatus.CREATED);
     }
 
     @PutMapping("/salary/{id}")
     public ResponseEntity<SalaryDto> updateSalary(@PathVariable int id, @Valid @RequestBody SalaryDto salaryInfo) {
-        SalaryDto salaryDtoUpdate=salaryMapper.modelToDto(salaryService.updateSalary(id, salaryMapper.dtoToModel(salaryInfo)));
+        SalaryDto salaryDtoUpdate = salaryMapper.modelToDto(salaryService.updateSalary(id, salaryMapper.dtoToModel(salaryInfo)));
         return new ResponseEntity<SalaryDto>(salaryDtoUpdate, HttpStatus.CREATED);
     }
 

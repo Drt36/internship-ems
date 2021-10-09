@@ -31,13 +31,13 @@ public class DepartmentController {
 
     @PostMapping("/departments")
     public ResponseEntity<DepartmentDto> saveDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
-        DepartmentDto departmentDtoSave=departmentMapper.modelToDto(departmentService.save(departmentMapper.dtoToModel(departmentDto)));
+        DepartmentDto departmentDtoSave = departmentMapper.modelToDto(departmentService.save(departmentMapper.dtoToModel(departmentDto)));
         return new ResponseEntity<DepartmentDto>(departmentDtoSave, HttpStatus.CREATED);
     }
 
     @PutMapping("/departments/{id}")
     public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable int id, @Valid @RequestBody DepartmentDto departmentInfo) {
-        DepartmentDto departmentDtoUpdate=departmentMapper.modelToDto(departmentService.updateDepartment(id,departmentMapper.dtoToModel(departmentInfo)));
+        DepartmentDto departmentDtoUpdate = departmentMapper.modelToDto(departmentService.updateDepartment(id, departmentMapper.dtoToModel(departmentInfo)));
         return new ResponseEntity<DepartmentDto>(departmentDtoUpdate, HttpStatus.CREATED);
     }
 

@@ -16,11 +16,11 @@ public class DepartmentDto {
 
     private int departmentId;
 
-    @Size(max=50,message = "Maximum length should be 50.")
+    @Size(max = 50, message = "Maximum length should be 50.")
     @NotEmpty(message = "Department name should not be empty!")
     private String name;
 
-    @Size(max=100,message = "Maximum length should be 100.")
+    @Size(max = 100, message = "Maximum length should be 100.")
     private String description;
 
     private List<Employee> employees;

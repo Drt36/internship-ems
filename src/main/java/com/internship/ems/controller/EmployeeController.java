@@ -4,7 +4,6 @@ import com.internship.ems.dto.EmployeeDto;
 import com.internship.ems.mapper.EmployeeMapper;
 import com.internship.ems.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +56,11 @@ public class EmployeeController {
     @GetMapping("/custom/employees/jpql")
     public List<EmployeeDto> getEmployeeByJpql() {
         return employeeMapper.modelsToDtos(employeeService.getEmployeeByJpql());
+    }
+
+    @GetMapping("/custom/employees/firstnameandage")
+    public List<EmployeeDto> getEmployeeByJpql(@RequestParam("firstName") String firstName, @RequestParam("age") int age) {
+        return employeeMapper.modelsToDtos(employeeService.getEmployeeByFirstNameAndAge(firstName, age));
     }
 
     @Transactional

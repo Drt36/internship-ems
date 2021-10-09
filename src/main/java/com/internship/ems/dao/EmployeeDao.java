@@ -9,8 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 import java.util.List;
 
 @Repository
@@ -23,12 +21,13 @@ public class EmployeeDao {
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
 
         Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
-
         Join<Employee, Salary> salary = employeeRoot.join("salary");
         Predicate amountPredicate = criteriaBuilder.greaterThanOrEqualTo(salary.get("amount"), amount);
         Predicate bonusPredicate = criteriaBuilder.lessThanOrEqualTo(salary.get("bonus"), bonus);
         Predicate finalPredicate = criteriaBuilder.and(amountPredicate, bonusPredicate);
+
         criteriaQuery.where(finalPredicate);
+
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 

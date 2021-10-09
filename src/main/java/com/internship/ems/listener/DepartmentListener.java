@@ -10,7 +10,9 @@ public class DepartmentListener {
     private static Log log = LogFactory.getLog(EmployeeListener.class);
 
     @PrePersist
-    private void beforePost(Department department) {log.info("On processing to add a department");}
+    private void beforePost(Department department) {
+        log.info("On processing to add a department");
+    }
 
     @PreUpdate
     private void beforeUpdate(Department department) {
